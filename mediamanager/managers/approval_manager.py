@@ -40,8 +40,7 @@ class ApprovalManager:
                         )
                         await asyncio.sleep(wait_time)
                     except Exception as e:
-                        logger.error(
-                            f"Erro ao enviar grupo de mídia aprovada: {e}")
+                        logger.error(f"Erro ao enviar grupo de mídia aprovada: {e}")
 
             await asyncio.sleep(5)
 
@@ -142,9 +141,7 @@ class ApprovalManager:
             new_text = f"✅ Mídia aprovada por {
                 callback_query.from_user.mention}."
             if callback_query.message.text != new_text:
-                await callback_query.message.edit_text(
-                    new_text
-                )
+                await callback_query.message.edit_text(new_text)
         else:
             new_text = f"❌ Mídia rejeitada por {
                 callback_query.from_user.mention}."
