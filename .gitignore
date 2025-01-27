@@ -175,3 +175,6 @@ test*.py
 
 # Session from pyrogram
 *.session
+
+# stats
+stats.json
