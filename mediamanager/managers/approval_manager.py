@@ -26,21 +26,22 @@ class ApprovalManager:
         while True:
             if not self.approvals_queue.empty():
                 client, media_list = self.approvals_queue.get()
-                try:
-                    await client.send_media_group(
-                        chat_id=self.settings.target_channel,
-                        media=media_list,
-                    )
-                except FloodWait as e:
-                    wait_time = e.value
-                    logger.warning(
-                        f"FloodWait ao enviar grupo de mídia aprovada: aguardando {
-                            wait_time} segundos antes de tentar novamente."
-                    )
-                    await asyncio.sleep(wait_time)
-                except Exception as e:
-                    logger.error(
-                        f"Erro ao enviar grupo de mídia aprovada: {e}")
+                for target_channel in self.settings.target_channel:
+                    try:
+                        await client.send_media_group(
+                            chat_id=target_channel,
+                            media=media_list,
+                        )
+                    except FloodWait as e:
+                        wait_time = e.value
+                        logger.warning(
+                            f"FloodWait ao enviar grupo de mídia aprovada: aguardando {
+                                wait_time} segundos antes de tentar novamente."
+                        )
+                        await asyncio.sleep(wait_time)
+                    except Exception as e:
+                        logger.error(
+                            f"Erro ao enviar grupo de mídia aprovada: {e}")
 
             await asyncio.sleep(5)
 

@@ -1,0 +1,9 @@
+services:
+  app:
+    image: ${DOCKER_USERNAME}/mediamanager:${IMAGE_TAG}
+    container_name: mediamanager
+    env_file:
+      - .env
+    volumes:
+      - ./MediaManagerBot.session:/app/MediaManagerBot.session
+      - ./stats.json:/app/stats.json
