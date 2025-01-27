@@ -13,4 +13,4 @@ RUN --mount=from=uv,source=/uv,target=/bin/uv \
 COPY . .
 RUN --mount=from=uv,source=/uv,target=/bin/uv \
     uv pip install --system -e .
-ENTRYPOINT [ "python", "bot.py" ]
+ENTRYPOINT [ "python", "mediamanager/bot.py" ]
